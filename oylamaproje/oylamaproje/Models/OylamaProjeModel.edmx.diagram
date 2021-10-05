@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="03b51ea1844a4825b34a2ebfc04aa3d9" Name="Diagram1">
+        <EntityTypeShape EntityType="oylamaprojedbModel.AcikOturum" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="oylamaprojedbModel.Admin" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="oylamaprojedbModel.Giris" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="oylamaprojedbModel.Oturum" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="oylamaprojedbModel.oylamasonucu" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="oylamaprojedbModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="oylamaprojedbModel.Uye" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
+        <AssociationConnector Association="oylamaprojedbModel.FK_AcikOturum_Oturum" ManuallyRouted="false" />
+        <AssociationConnector Association="oylamaprojedbModel.FK_AcikOturum_Uye" ManuallyRouted="false" />
+        <AssociationConnector Association="oylamaprojedbModel.FK_Giris_Admin" ManuallyRouted="false" />
+        <AssociationConnector Association="oylamaprojedbModel.FK_Giris_Uye" ManuallyRouted="false" />
+        <AssociationConnector Association="oylamaprojedbModel.FK_oylamasonucu_Uye" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

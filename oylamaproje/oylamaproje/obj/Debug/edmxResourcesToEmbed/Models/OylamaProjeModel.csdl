@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="oylamaprojedbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AcikOturum">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OturumID" Type="Int32" />
+    <Property Name="UyeID" Type="Int32" />
+    <NavigationProperty Name="Oturum" Relationship="Self.FK_AcikOturum_Oturum" FromRole="AcikOturum" ToRole="Oturum" />
+    <NavigationProperty Name="Uye" Relationship="Self.FK_AcikOturum_Uye" FromRole="AcikOturum" ToRole="Uye" />
+  </EntityType>
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="E_mail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Sifre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Giris" Relationship="Self.FK_Giris_Admin" FromRole="Admin" ToRole="Giris" />
+  </EntityType>
+  <EntityType Name="Giris">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UyeID" Type="Int32" />
+    <Property Name="AdminID" Type="Int32" />
+    <NavigationProperty Name="Admin" Relationship="Self.FK_Giris_Admin" FromRole="Giris" ToRole="Admin" />
+    <NavigationProperty Name="Uye" Relationship="Self.FK_Giris_Uye" FromRole="Giris" ToRole="Uye" />
+  </EntityType>
+  <EntityType Name="Oturum">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OturumAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="OturumID" Type="Int32" />
+    <Property Name="OylamaSistemi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AcikOturum" Relationship="Self.FK_AcikOturum_Oturum" FromRole="Oturum" ToRole="AcikOturum" />
+  </EntityType>
+  <EntityType Name="oylamasonucu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="uyeID" Type="Int32" Nullable="false" />
+    <Property Name="kart" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Uye" Relationship="Self.FK_oylamasonucu_Uye" FromRole="oylamasonucu" ToRole="Uye" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Uye">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Soyad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="E_mail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Sifre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AcikOturum" Relationship="Self.FK_AcikOturum_Uye" FromRole="Uye" ToRole="AcikOturum" />
+    <NavigationProperty Name="Giris" Relationship="Self.FK_Giris_Uye" FromRole="Uye" ToRole="Giris" />
+    <NavigationProperty Name="oylamasonucu" Relationship="Self.FK_oylamasonucu_Uye" FromRole="Uye" ToRole="oylamasonucu" />
+  </EntityType>
+  <Association Name="FK_AcikOturum_Oturum">
+    <End Role="Oturum" Type="Self.Oturum" Multiplicity="0..1" />
+    <End Role="AcikOturum" Type="Self.AcikOturum" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Oturum">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AcikOturum">
+        <PropertyRef Name="OturumID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AcikOturum_Uye">
+    <End Role="Uye" Type="Self.Uye" Multiplicity="0..1" />
+    <End Role="AcikOturum" Type="Self.AcikOturum" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Uye">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AcikOturum">
+        <PropertyRef Name="UyeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Giris_Admin">
+    <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
+    <End Role="Giris" Type="Self.Giris" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Admin">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Giris">
+        <PropertyRef Name="AdminID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Giris_Uye">
+    <End Role="Uye" Type="Self.Uye" Multiplicity="0..1" />
+    <End Role="Giris" Type="Self.Giris" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Uye">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Giris">
+        <PropertyRef Name="UyeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_oylamasonucu_Uye">
+    <End Role="Uye" Type="Self.Uye" Multiplicity="1" />
+    <End Role="oylamasonucu" Type="Self.oylamasonucu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Uye">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="oylamasonucu">
+        <PropertyRef Name="uyeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="oylamaprojedbEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AcikOturum" EntityType="Self.AcikOturum" />
+    <EntitySet Name="Admin" EntityType="Self.Admin" />
+    <EntitySet Name="Giris" EntityType="Self.Giris" />
+    <EntitySet Name="Oturum" EntityType="Self.Oturum" />
+    <EntitySet Name="oylamasonucu" EntityType="Self.oylamasonucu" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="Uye" EntityType="Self.Uye" />
+    <AssociationSet Name="FK_AcikOturum_Oturum" Association="Self.FK_AcikOturum_Oturum">
+      <End Role="Oturum" EntitySet="Oturum" />
+      <End Role="AcikOturum" EntitySet="AcikOturum" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AcikOturum_Uye" Association="Self.FK_AcikOturum_Uye">
+      <End Role="Uye" EntitySet="Uye" />
+      <End Role="AcikOturum" EntitySet="AcikOturum" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Giris_Admin" Association="Self.FK_Giris_Admin">
+      <End Role="Admin" EntitySet="Admin" />
+      <End Role="Giris" EntitySet="Giris" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Giris_Uye" Association="Self.FK_Giris_Uye">
+      <End Role="Uye" EntitySet="Uye" />
+      <End Role="Giris" EntitySet="Giris" />
+    </AssociationSet>
+    <AssociationSet Name="FK_oylamasonucu_Uye" Association="Self.FK_oylamasonucu_Uye">
+      <End Role="Uye" EntitySet="Uye" />
+      <End Role="oylamasonucu" EntitySet="oylamasonucu" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
